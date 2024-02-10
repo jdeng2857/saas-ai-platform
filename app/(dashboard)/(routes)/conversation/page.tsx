@@ -10,6 +10,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Empty } from "@/components/empty";
 import { useRouter } from "next/navigation";
 import { ChatCompletionMessageParam } from "openai/resources/chat/completions";
 import { useState } from "react";
@@ -100,6 +101,10 @@ const ConversationPage = () => {
                     </Form>
                 </div>
                 <div className="space-y-4 mt-4">
+                    {messages.length === 0 && !isLoading && (
+                        <Empty label="No conversation started."/>
+                    )}
+                    
                     <div className="flex flex-col-reverse gap-y-4">
                         {messages.map((message) => (
                             <div key={message.content}>
